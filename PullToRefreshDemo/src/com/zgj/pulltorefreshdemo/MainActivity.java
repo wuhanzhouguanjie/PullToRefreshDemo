@@ -8,6 +8,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnPullEventListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.State;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -15,16 +16,21 @@ import android.os.SystemClock;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.LinearLayout.LayoutParams;
 
 public class MainActivity extends Activity implements OnRefreshListener,
 		OnPullEventListener {
-	private PullToRefreshListView mPullToRefreshListView;
+	private PullToRefreshScrollView  mPullToRefreshListView;
 
 	private GetDataTask mGetDataTask;
 
 	private ArrayAdapter<String> mAdapter;
 
 	private ArrayList<String> mArrayList = new ArrayList<String>();
+	
+	private ListView mList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +41,12 @@ public class MainActivity extends Activity implements OnRefreshListener,
 	}
 
 	private void init() {
-		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.list);
+		mPullToRefreshListView = (PullToRefreshScrollView) findViewById(R.id.list);
 		// 添加下拉刷新事件
 		mPullToRefreshListView.setOnRefreshListener(this);
 		// 添加下拉刷新状态事件，以便及时现实刷新时间
 		mPullToRefreshListView.setOnPullEventListener(this);
-		
+		mPullToRefreshListView.setScrollingWhileRefreshingEnabled(true);
 		mPullToRefreshListView.setMode(Mode.BOTH);
 
 		mArrayList.add("测试数据1");
@@ -52,6 +58,10 @@ public class MainActivity extends Activity implements OnRefreshListener,
 
 		mAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_expandable_list_item_1, mArrayList);
+		
+//		mList = new ListView(this);
+//		LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(LinearLayout.LayoutParams)
+//		mList.setLayoutParams();
 		
 		mPullToRefreshListView.setAdapter(mAdapter);
 	}

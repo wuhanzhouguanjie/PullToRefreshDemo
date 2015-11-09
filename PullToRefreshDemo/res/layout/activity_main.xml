@@ -9,11 +9,11 @@
     tools:context="com.zgj.pulltorefreshdemo.MainActivity"
     android:background="@color/bg" >
 
-	<com.handmark.pulltorefresh.library.PullToRefreshListView 
+	<com.handmark.pulltorefresh.library.PullToRefreshScrollView 
 	    android:id="@+id/list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent">
-	</com.handmark.pulltorefresh.library.PullToRefreshListView>
+	</com.handmark.pulltorefresh.library.PullToRefreshScrollView>
     
 
 </RelativeLayout>
